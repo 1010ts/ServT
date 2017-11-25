@@ -17,14 +17,17 @@ namespace tryCCC.Controllers
             List<string> Rez = new List<string>();
             foreach (var id in order_id.Split(' '))
             {
-                var Q = new JArray();
+                JObject json = new JObject();
+                json.Add("order_id", id);
+                JArray coords = new JArray();
+                var Q = new JArray(tco.Get(order_id));
                 foreach (var token in Q)
                 {
-                    Q.Remove("measurements");
-                    Q.Remove("time");
+                    string loca = (string)token["coords"];
+                    coords.Add(loca);
                 }
-
-                Rez.Add(Q.ToString());
+                json.Add("coords", coords);
+                Rez.Add(json.ToString());
             }
 
             return Rez;
