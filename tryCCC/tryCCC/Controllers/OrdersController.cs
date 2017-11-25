@@ -23,16 +23,22 @@ namespace tryCCC.Controllers
             return "{ \'status\':\'ok\' }";
         }
 
-        public string Get(string order_id)
+        public IEnumerable<string> Get(string order_id)
         {
+            List<string> Rez = new List<string>();
             var reader = new SqlCommand($"SELECT [Coords], [Time], [Measurements] FROM [OrdersTable] where [Order_id] = \'{order_id}\'", WebApiConfig.BaseConnection).ExecuteReader();
             reader.Read();
-            var res = $"{{ \'status\': \'{(reader.HasRows ? "ok" : "fail")}\', " +
-                $"\'Coords\': \'{(reader.HasRows ? reader.GetString(0) : "")}\', " +
-                $"\'Time\': \'{(reader.HasRows ? reader.GetString(1) : "")}\', " +
-                $"\'Measurements\': \'{(reader.HasRows ? reader.GetString(2) : "")}\' }}";
+            do
+            {
+                var res = $"{{ \'status\': \'{(reader.HasRows ? "ok" : "fail")}\', " +
+                    $"\'Coords\': \'{(reader.HasRows ? reader.GetString(0) : "")}\', " +
+                    $"\'Time\': \'{(reader.HasRows ? reader.GetString(1) : "")}\', " +
+                    $"\'Measurements\': \'{(reader.HasRows ? reader.GetString(2) : "")}\' }}";
+                Rez.Add(res);
+
+            } while (reader.Read());
             reader.Close();
-            return res;
+            return Rez;
         }
 
     }
