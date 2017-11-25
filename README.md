@@ -9,8 +9,8 @@
     0,
     1
   ],
-  "arriving_place": "name of place",
-  "arriving_coords": [
+  "destination_place": "name of place",
+  "destination_coords": [
     0,
     1
   ],
@@ -91,3 +91,11 @@
   }, ...
 ]
 ```
+
+# Bro wants to ORDER
+## POST params: customer_id="", car_id="", car_params="(\*)", department_coords="{0} {1}", department_place="", department_time="", destination_coords="{0} {1}", destination_place="", description=""
+
+```
+{ "status":"ok" }
+```
+
