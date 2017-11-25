@@ -113,7 +113,8 @@
 ```
   {
     "coords": [0, 1],
-    "time": "time"
+
+"time": "time"
     "capabilities": {
       "temperature": [
         -20,
@@ -162,3 +163,20 @@
    },
 ]
 ```
+
+# BRO creates user
+## POST api\client params: (string name, string phone, string email = "")
+
+**ANS** status
+
+
+# BRO wants id of user by phone + name
+## GET api\client params: (string name, string phone)
+
+**ANS** status, client_id
+
+
+# BRO wants user info by id
+## POST api\client params: (string id)
+
+**ANS** status, name, phone, email
