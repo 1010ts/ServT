@@ -58,7 +58,7 @@
       -20,
       36
     ],
-    "humidity": [
+"humidity": [
       40,
       60
     ],
@@ -105,5 +105,47 @@
 
 ```
 { "status":"ok" }
+```
+
+# Bro wants detales on cars 
+## GET param: coord="{0} {1}" или time="time"
+
+```
+  {
+    "coords": [0, 1],
+    "time": "time"
+    "capabilities": {
+      "temperature": [
+        -20,
+        36
+      ],
+      "humidity": [
+        40,
+        60
+      ],
+      "preassure": [
+        1212,
+        1213
+      ]
+    }
+  }
+```
+
+# Bro wants coord for map
+## GET params: order_id="{0} {1} {2} ..." 
+
+```
+[
+  {
+    "order_id": "order_id",
+    "car_id": "car_id",
+    "coords": [
+      [
+        0,
+        1
+      ],...
+    ]
+  }, ...
+]
 ```
 
