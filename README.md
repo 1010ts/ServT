@@ -173,6 +173,6 @@
 
 
 # BRO wants user info by id
-## POST api\client params: (string id)
+## GET api\client params: (string id)
 
 **ANS** status, name, phone, email
