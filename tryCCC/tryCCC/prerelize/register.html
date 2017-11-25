@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TenTents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/html">
+    <link href="css/docs.min.css" rel="stylesheet">
+    <link href="img/short1010.png" rel="icon">
+
+</head>
+
+<header>
+    <div class="navbar bg-success" style="max-font-size: 90%" >
+        <a class="navbar-brand" href="main.html">
+            <img style="max-width: 55%; margin-top: -20px"
+                 src="img/main_logo.png">
+        </a>
+        <ul class="nav justify-content-end">
+            <a class="nav-link text-light" href="support.html"><p>Support</p></a>
+            <a class="nav-link text-light" href="login.html"><p>Log in</p></a>
+            <a class="nav-link text-light" href="register.html"><p>Sign up</p></a>
+        </ul>
+    </div>
+
+</header>
+<body>
+
+<div class="container">
+    <br>
+    <div style="margin-right: 1vw; max-width: 380px">
+        <h5><p style="text-align: center">Create an account</h5>
+
+        <form action="/register/" method="post" >
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="InputUsername" placeholder="Name" name="name"
+                       value="">
+            </div>
+            <div class="form-group">
+                <small id="email" class="form-text text-muted">
+                    We'll never share your phone with anyone else.
+                </small>
+
+            </div>
+            <div class="form-group">
+
+                <input type="text" class="form-control" id="InputPhone" placeholder="Phone" name="phone"
+                       value="">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="InputEmail" placeholder="Email" name="email"
+                       value="">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary bg-success" id ="signUp" style="width: 100%"><a href="main.html">Sign up</a></button>
+                <p style="text-align: center" >
+                    By signing up, you agree to our
+                    <br>
+                    <a href="/legal/terms/" class="text-secondary">Terms</a>
+                    &
+                    <a href="/legal/privacy/" class="text-secondary">Privacy Policy</a>
+                    .
+                </p>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script>
+    $('#signUp').on('click',function(){
+        console.log("click on button")
+        $.ajax({
+            type:"POST",
+            url:"http://1010ts.azurewebsites.net/api/client",
+            formData:{
+                name:$('#InputUsername').val(),
+                phone:$('#InputPhone').val(),
+                email:$('#InputEmail').val()
+            },
+            success:function(data){
+                console.log("My ans is " + data);
+            },
+            error:function(err){
+                console.log("Error is" + err)
+            }
+        })
+    })
+
+</script>
+</body>
+
+
+
+
+
+</html>
