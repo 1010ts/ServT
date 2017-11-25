@@ -1,14 +1,11 @@
 # Andruha wants to connect with server 
-## GET params: car_id=""
+## GET api\CarTask params: car_id=""
 ```
 {
-  "customer_id": "customer_id",
+  "customer_phone": "customer_phone",
   "department_date": "2012-03-19T07:22Z",
   "department_place": "name of place",
-  "department_coords": [
-    0,
-    1
-  ],
+  "department_coords": "{0} {1}",
   "destination_place": "name of place",
   "destination_coords": [
     0,
@@ -33,17 +30,16 @@
 ```
 
 # Andruha sends his data to serv
-## POST param: jsoned=""
+## POST api\Orders\  param: jsoned="(&)"
+## Ans status ok
+**(&)**
 ```
 [
 {
   "order_id": "order_id",
-  "current_time": "2012-03-19T07:22Z",
+  "time": "2012-03-19T07:22Z",
   "measurements": "хуйня, которая упала с сервака",
-  "current_coords": [
-    0,
-    1
-  ]
+  "coords": "{0} {1}"
 }, ...
 ]
 ```
@@ -93,15 +89,16 @@
 ```
 
 # Bro wants to ORDER
-## POST params: customer_id="", 
-## car_id="", 
-## car_params="(\*)", 
-## department_coords="{0} {1}", 
-## department_place="", 
-## department_time="", 
-## destination_coords="{0} {1}", 
-## destination_place="", 
-## description=""
+## POST api\OrderCar params: (
+##            string Car_id,          
+##            string Department_time,
+  ##          string Department_place,
+  ##          string Department_coords,
+  ##          string Destination_place,
+  ##          string Destination_coords,
+  ##          string Requirements,  
+##            string Description = ""     
+  ##          )
 
 ```
 { "status":"ok" }
@@ -133,13 +130,12 @@
 ```
 
 # Bro wants coord for map
-## GET params: order_id="{0} {1} {2} ..." 
+## GET  api/OrdersMapping params: order_id="{0} {1} {2} ..." 
 
 ```
 [
   {
     "order_id": "order_id",
-    "car_id": "car_id",
     "coords": [
       [
         0,
