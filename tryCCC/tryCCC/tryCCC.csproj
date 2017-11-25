@@ -181,6 +181,7 @@
     <Compile Include="Controllers\CarTaskController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientOrderController.cs" />
+    <Compile Include="Controllers\NewOrderController.cs" />
     <Compile Include="Controllers\OrderCarController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrdersMappingController.cs" />
