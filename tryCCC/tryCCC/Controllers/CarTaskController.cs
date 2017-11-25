@@ -15,7 +15,6 @@ namespace tryCCC.Controllers
 
             /*
              {
-                      "customer_phone": "customer_phone",
                       "department_date": "2012-03-19T07:22Z",
                       "department_place": "name of place",
                       "department_coords": [

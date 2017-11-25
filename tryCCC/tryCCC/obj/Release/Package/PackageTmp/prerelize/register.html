@@ -78,7 +78,7 @@
         $.ajax({
             type:"POST",
             url:"http://1010ts.azurewebsites.net/api/client",
-            data:{
+            formData:{
                 name:$('#InputUsername').val(),
                 phone:$('#InputPhone').val(),
                 email:$('#InputEmail').val()

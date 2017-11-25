@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TenTents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/html">
+    <link href="css/docs.min.css" rel="stylesheet">
+    <link href="img/short1010.png" rel="icon">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.css' rel='stylesheet' />
+
+
+</head>
+
+<header>
+    <div class="navbar bg-success" style="max-font-size: 90%" >
+        <a class="navbar-brand" href="main.html">
+            <img style="max-width: 55%; margin-top: -20px"
+                 src="img/main_logo.png">
+        </a>
+
+        <ul class="nav justify-content-end">
+            <a class="nav-link text-light" href="support.html"><p>Support</p></a>
+            <a class="nav-link text-light" href="login.html"><p>Log in</p></a>
+            <a class="nav-link text-light" href="register.html"><p>Sign up</p></a>
+        </ul>
+    </div>
+
+</header>
+
+<body>
+
+<div class='sidebar pad2'>
+    <h1 style="text-align:center">
+        Listing
+    </h1>
+</div>
+<div class='sidebar'>
+    <div class='heading'>
+        <h1 style="text-align:center">Active cars</h1>
+    </div>
+    <div class='beading'>
+        <h1 style="text-align:center">Finished cars</h1>
+    </div>
+    <div id='listings' class='listings'></div>
+
+</div>
+<div id="map" class='map pad2'>
+</div>
+
+
+
+
+
+<style>
+    body {
+        color: #404040;
+        font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin: 0;
+        font-weight: 400;
+        line-height: 20px;
+        padding: 20px 2px;
+    }
+
+    a {
+        color: #404040;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #101010;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 33.3333%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        border-right: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .pad2 {
+        padding: 20px;
+    }
+
+
+
+    .heading {
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 10px;
+
+    }
+
+    .beading {
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 10px;
+    }
+
+    .listings {
+        height: 100%;
+        overflow: auto;
+        padding-bottom: 60px;
+    }
+
+    .listings .item {
+        display: block;
+        border-bottom: 1px solid #eee;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    .listings .item:last-child { border-bottom: none; }
+
+    .listings .item .title {
+        display: block;
+        color: #00853e;
+        font-weight: 700;
+    }
+
+    .listings .item .title small { font-weight: 400; }
+
+    .listings .item.active .title,
+    .listings .item .title:hover { color: #8cc63f; }
+
+    .listings .item.active {
+        background-color: #f8f8f8;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+        border-left: 0;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #00853e;
+        border-radius: 0;
+    }
+
+    .clearfix { display: block; }
+
+    .clearfix::after {
+        content: '.';
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    /* Marker tweaks */
+    .mapboxgl-popup-close-button {
+        display: none;
+    }
+
+    .mapboxgl-popup-content {
+        font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+        padding: 0;
+        width: 180px;
+    }
+
+    .mapboxgl-popup-content-wrapper {
+        padding: 1%;
+    }
+
+    .mapboxgl-popup-content h3 {
+        background: #91c949;
+        color: #fff;
+        margin: 0;
+        display: block;
+        padding: 10px;
+        border-radius: 3px 3px 0 0;
+        font-weight: 700;
+        margin-top: -15px;
+    }
+
+    .mapboxgl-popup-content h4 {
+        margin: 0;
+        display: block;
+        padding: 10px;
+        font-weight: 400;
+    }
+
+    .mapboxgl-popup-content div {
+        padding: 100px;
+    }
+
+    .mapboxgl-container .leaflet-marker-icon {
+        cursor: pointer;
+    }
+
+    .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+        margin-top: 15px;
+    }
+
+    .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+        border-bottom-color: #91c949;
+    }
+    /* Always set the map height explicitly to define the size of the div
+      * element that contains the map. */
+    .map {
+        position: absolute;
+        left: 33.3333%;
+        width: 66.6666%;
+        height:90%;
+        top: 80px;
+        bottom: 0;
+        border: groove;
+    }
+    /*!* Optional: Makes the sample page fill the window. *!*/
+    /*html, body {*/
+        /*height: 100%;*/
+        /*margin: 0;*/
+        /*padding: 0;*/
+    /*}*/
+</style>
+
+<script>
+//    var flightPath = responseArray.map(function (item) {
+//        return new google.maps.LatLng(item.latitude, item.longitude);
+//    });
+
+
+    function flyToStore(currentFeature) {
+        map.flyTo({
+            center: currentFeature.geometry.coordinates,
+            zoom: 15
+        });
+    }
+
+    function createPopUp(currentFeature) {
+        var popUps = document.getElementsByClassName('mapboxgl-popup');
+        // Check if there is already a popup on the map and if so, remove it
+        if (popUps[0]) popUps[0].remove();
+
+        var popup = new mapboxgl.Popup({ closeOnClick: false })
+            .setLngLat(currentFeature.geometry.coordinates)
+            .setHTML('<h3>Sweetgreen</h3>' +
+                '<h4>' + currentFeature.properties.address + '</h4>')
+            .addTo(map);
+    }
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZW5pa2l0YTEiLCJhIjoiY2phZXlwc2EzMXRnajMzcDc2MnAzb2pneSJ9.Sgb3_uoPIRLmlaFfzfiHjw';
+    // This adds the map to your page
+    var map = new mapboxgl.Map({
+        // container id specified in the HTML
+        container: 'map',
+        // style URL
+//        style: 'link to picture of track',
+        // initial position in [lon, lat] format
+        center: [-77.034084, 38.909671],
+        // initial zoom
+        zoom: 14
+    });
+    function buildLocationList(data) {
+        // Iterate through the list of stores
+        for (i = 0; i < data.features.length; i++) {
+            var currentFeature = data.features[i];
+            // Shorten data.feature.properties to just `prop` so we're not
+            // writing this long form over and over again.
+            var prop = currentFeature.properties;
+            // Select the listing container in the HTML and append a div
+            // with the class 'item' for each store
+            var listings = document.getElementById('listings');
+            var listing = listings.appendChild(document.createElement('div'));
+            listing.className = 'item';
+            listing.id = 'listing-' + i;
+
+            // Create a new link with the class 'title' for each active car
+            // and fill it with the car location
+            var link = listing.appendChild(document.createElement('a'));
+            link.href = '#';
+            link.className = 'title';
+            link.dataPosition = i;
+            link.innerHTML = prop.geolocation;
+
+            // Create a new div with the class 'details' for each car
+            // and fill it with the data
+            var details = listing.appendChild(document.createElement('div'));
+            details.innerHTML = prop.geolocation;
+            if (prop.geolocation) {
+                details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+            }
+        }
+    }
+
+</script>
+<script>
+
+    // This example creates a 2-pixel-wide red polyline showing the path of William
+    // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+    // Brisbane, Australia.
+
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: {lat: 0, lng: -180},
+            mapTypeId: 'terrain'
+        });
+
+        var flightPlanCoordinates = [
+            {lat: 37.772, lng: -122.214},
+            {lat: 25.884, lng: -135.906},
+            {lat: 21.291, lng: -157.821},
+            {lat: -18.142, lng: 178.431},
+            {lat: -27.467, lng: 153.027}
+        ];
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkkuy0Cf9efZbKUJUOeRx3LdouFDjZnY&callback=initMap">
+</script>
+
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script>
+    function makeRequest(){
+        $.ajax({
+            type:"POST",
+            url:"http://1010ts.azurewebsites.net/api/client?name=1212&phone=5678765&email=567656",
+//            formData:{
+//                name:"Her",
+//                phone:"6789876",
+//                email:"example@asdasd"
+//            },
+            success:function(data){
+                console.log("My ans is " + data);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    }
+    makeRequest()
+</script>
+</body>
+</html>
