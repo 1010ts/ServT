@@ -77,12 +77,13 @@
         console.log("click on button")
         $.ajax({
             type:"POST",
-            url:"http://1010ts.azurewebsites.net/api/client",
-            data:{
-                name:$('#InputUsername').val(),
-                phone:$('#InputPhone').val(),
-                email:$('#InputEmail').val()
-            },
+            url:"http://1010ts.azurewebsites.net/api/client?name=" + $('#InputUsername').val()+
+            "&phone=" + $('#InputPhone').val() + "&email=" + $('#InputEmail').val(),
+//            data:{
+//                name:$('#InputUsername').val(),
+//                phone:$('#InputPhone').val(),
+//                email:$('#InputEmail').val()
+//            },
             success:function(data){
                 console.log("My ans is " + data);
             },

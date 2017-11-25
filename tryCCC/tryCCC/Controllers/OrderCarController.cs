@@ -58,17 +58,26 @@ namespace tryCCC.Controllers
                 $"[Destination_place], [Destination_coords], [Requirements], " +
                 $"[Description] FROM [ClientsTable] where [Car_id] = \'{car_id}\'", WebApiConfig.BaseConnection).ExecuteReader();
             reader.Read();
-            var res = $"{{ \'status\': \'{(reader.HasRows ? "ok" : "fail")}\', " +
-                $"\'order_id\': \'{(reader.HasRows ? reader.GetString(0) : "")}\', " +
-                $"\'Department_time\': \'{(reader.HasRows ? reader.GetString(1) : "")}\', " +
-                $"\'Department_place\': \'{(reader.HasRows ? reader.GetString(2) : "")}\', " +
-                $"\'Department_coords\': \'{(reader.HasRows ? reader.GetString(3) : "")}\', " +
-                $"\'Destination_place\': \'{(reader.HasRows ? reader.GetString(4) : "")}\', " +
-                $"\'Destination_coords\': \'{(reader.HasRows ? reader.GetString(5) : "")}\', " +
-                $"\'Requirements\': \'{(reader.HasRows ? reader.GetString(6) : "")}\', " +
-                $"\'Description\': \'{(reader.HasRows ? reader.GetString(7) : "")}\' }}";
+            Tuple<TimeSpan, string> MinPair = new Tuple<TimeSpan, string>(TimeSpan.FromDays(1000), "{'status':'fail'}");
+            do
+            {
+                var res = $"{{ \'status\': \'{(reader.HasRows ? "ok" : "fail")}\', " +
+                            $"\'order_id\': \'{(reader.HasRows ? reader.GetString(0) : "")}\', " +
+                            $"\'Department_time\': \'{(reader.HasRows ? reader.GetString(1) : "")}\', " +
+                            $"\'Department_place\': \'{(reader.HasRows ? reader.GetString(2) : "")}\', " +
+                            $"\'Department_coords\': \'{(reader.HasRows ? reader.GetString(3) : "")}\', " +
+                            $"\'Destination_place\': \'{(reader.HasRows ? reader.GetString(4) : "")}\', " +
+                            $"\'Destination_coords\': \'{(reader.HasRows ? reader.GetString(5) : "")}\', " +
+                            $"\'Requirements\': \'{(reader.HasRows ? reader.GetString(6) : "")}\', " +
+                            $"\'Description\': \'{(reader.HasRows ? reader.GetString(7) : "")}\' }}";
+                if (reader.HasRows)
+                {
+                    DateTime dateTime = DateTime.Parse(reader.GetString(1));
+                    if (DateTime.Now - dateTime < MinPair.Item1 && (DateTime.Now - dateTime > TimeSpan.FromDays(4) || DateTimeOffset.Now == new DateTimeOffset(dateTime))) MinPair = new Tuple<TimeSpan, string>(DateTime.Now - dateTime, res);
+                }
+            } while (reader.Read());
             reader.Close();
-            return res;
+            return MinPair.Item2;
         }
     }
 }
