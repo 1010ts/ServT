@@ -149,3 +149,16 @@
 ]
 ```
 
+# BRO wants list of orders
+## GET 
+
+```
+[
+   {
+       "order_id" : "order_id",
+       "department_place": "department_place",
+       "destination_place": "destination_place",
+       "description": "description"
+   },
+]
+```
