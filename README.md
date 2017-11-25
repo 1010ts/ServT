@@ -37,7 +37,7 @@
 ```
 [
 {
-  "car_id": "car_id",
+  "order_id": "order_id",
   "current_time": "2012-03-19T07:22Z",
   "measurements": "хуйня, которая упала с сервака",
   "current_coords": [
