@@ -108,7 +108,7 @@
 ```
 
 # Bro wants detales on cars 
-## GET param: coord="{0} {1}" или time="time"
+## GET param: order_id="", coord="{0} {1}" ИЛИ time="time"
 
 ```
   {
@@ -150,7 +150,7 @@
 ```
 
 # BRO wants list of orders
-## GET 
+## GET param: client_id=""
 
 ```
 [
