@@ -54,7 +54,10 @@
                        value="">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary bg-success" id ="signUp" style="width: 100%"><a href="main.html">Sign up</a></button>
+                <button class="btn btn-primary bg-success text-white" style="width: 100%"
+                   id="signUp">
+                        Sign up
+                </button>
                 <p style="text-align: center" >
                     By signing up, you agree to our
                     <br>
@@ -73,22 +76,23 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script>
-    $('#signUp').on('click',function(){
-        console.log("click on button")
+    $('#signUp').on('click',function() {
+        console.log("click on button");
         $.ajax({
             type:"POST",
             url:"http://1010ts.azurewebsites.net/api/client?name=" + $('#InputUsername').val()+
             "&phone=" + $('#InputPhone').val() + "&email=" + $('#InputEmail').val(),
 //            data:{
-//                name:$('#InputUsername').val(),
+//            control_orders    name:$('#InputUsername').val(),
 //                phone:$('#InputPhone').val(),
 //                email:$('#InputEmail').val()
 //            },
             success:function(data){
                 console.log("My ans is " + data);
+                window.location='http://1010ts.azurewebsites.net/prerelize/web/new_order.html';
             },
             error:function(err){
-                console.log("Error is" + err)
+                console.log("Error is " + err)
             }
         })
     })

@@ -90,7 +90,7 @@ C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\bin\Microsoft.AI.DependencyColle
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\bin\Microsoft.AI.Web.xml
-C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\obj\Debug\tryCCC.csprojResolveAssemblyReference.cache
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\obj\Debug\tryCCC.csproj.CoreCompileInputs.cache
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\obj\Debug\tryCCC.dll
 C:\Users\chris\Source\Repos\ServT\tryCCC\tryCCC\obj\Debug\tryCCC.pdb
+C:\Users\chris\source\repos\ServT\tryCCC\tryCCC\obj\Debug\tryCCC.csprojResolveAssemblyReference.cache

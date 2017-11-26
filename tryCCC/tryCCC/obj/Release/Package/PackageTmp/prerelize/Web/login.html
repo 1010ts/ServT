@@ -39,7 +39,7 @@
                        value="">
 
                 <small id="userhelp" class="form-text text-muted">
-                    здесь будет сообщение об ошибке, которое будет появляться
+
                 </small>
 
             </div>
@@ -47,12 +47,11 @@
                 <input type="text" class="form-control" id="InputPhone" placeholder="Phone"
                        name="phone" value="">
 
-                <small id="pwdhelp" class="form-text text-muted">
-                    Здесь сообение об ошибке пароля
-                </small>
-
             </div>
-            <button type="submit" class="btn btn-primary bg-success" style="width: 100%;">Login</button>
+            <button class="btn btn-primary bg-success text-white" style="width: 100%"
+                    id="logIn">
+                Login
+            </button>
         </form>
     </div>
 
@@ -61,8 +60,34 @@
 </div>
 
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script>
+    $('#logIn').on('click',function(){
+        console.log("click on button");
+        $.ajax({
+            type:"GET",
+            url:"http://1010ts.azurewebsites.net/api/client?name=" + $('#InputName').val()+
+            "&phone=" + $('#InputPhone').val(),
+            success:function(data){
+                console.log("My ans is " + data);
+                var myData = JSON.parse(data);
+                if (myData.status == "fail"){
+                    ('#userhelp').text("This user does not exist. " +
+                        "Please check the correctness of the user name and phone number.");
+                    window.location='http://1010ts.azurewebsites.net/prerelize/web/login.html';
+                } else {
+                    window.location='http://1010ts.azurewebsites.net/prerelize/web/new_order.html';
+                }
+            },
+            error:function(err){
+                console.log("Error is" + err)
+            }
+        })
+    })
+
+</script>
 
 </body>
 
