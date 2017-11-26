@@ -27,7 +27,7 @@ namespace tryCCC.Controllers
 
         public string Post(string order_id, string client_id)
         {
-            new SqlCommand($"Insert into [ClientOrderTable] ([[order_id], [client_id]) values ('{order_id}', '{client_id}')", WebApiConfig.BaseConnection).ExecuteNonQuery();
+            new SqlCommand($"Insert into [ClientOrderTable] ([order_id], [client_id]) values ('{order_id}', '{client_id}')", WebApiConfig.BaseConnection).ExecuteNonQuery();
             return "{ \'status\':\'ok\' }";
         }
     }

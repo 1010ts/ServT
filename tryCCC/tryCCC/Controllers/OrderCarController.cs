@@ -56,13 +56,13 @@ namespace tryCCC.Controllers
             var reader = new SqlCommand($"SELECT [order_id], " +
                 $"[Department_time], [Department_place], [Department_coords], " +
                 $"[Destination_place], [Destination_coords], [Requirements], " +
-                $"[Description] FROM [ClientsTable] where [Car_id] = \'{car_id}\'", WebApiConfig.BaseConnection).ExecuteReader();
+                $"[Description] FROM [OrderCarTable] where [Car_id] = \'{car_id}\'", WebApiConfig.BaseConnection).ExecuteReader();
             reader.Read();
             Tuple<TimeSpan, string> MinPair = new Tuple<TimeSpan, string>(TimeSpan.FromDays(1000), "{'status':'fail'}");
             do
             {
                 var res = $"{{ \'status\': \'{(reader.HasRows ? "ok" : "fail")}\', " +
-                            $"\'order_id\': \'{(reader.HasRows ? reader.GetString(0) : "")}\', " +
+                            $"\'order_id\': \'{(reader.HasRows ? reader.GetGuid(0).ToString() : "")}\', " +
                             $"\'Department_time\': \'{(reader.HasRows ? reader.GetString(1) : "")}\', " +
                             $"\'Department_place\': \'{(reader.HasRows ? reader.GetString(2) : "")}\', " +
                             $"\'Department_coords\': \'{(reader.HasRows ? reader.GetString(3) : "")}\', " +
@@ -73,7 +73,7 @@ namespace tryCCC.Controllers
                 if (reader.HasRows)
                 {
                     DateTime dateTime = DateTime.Parse(reader.GetString(1));
-                    if (DateTime.Now - dateTime < MinPair.Item1 && (DateTime.Now - dateTime > TimeSpan.FromDays(4) || DateTimeOffset.Now == new DateTimeOffset(dateTime))) MinPair = new Tuple<TimeSpan, string>(DateTime.Now - dateTime, res);
+                    if (DateTime.Now - dateTime < MinPair.Item1 && (DateTime.Now - dateTime > TimeSpan.FromDays(4) || DateTimeOffset.Now.Date == new DateTimeOffset(dateTime).Date)) MinPair = new Tuple<TimeSpan, string>(DateTime.Now - dateTime, res);
                 }
             } while (reader.Read());
             reader.Close();
