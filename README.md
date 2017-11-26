@@ -38,7 +38,7 @@
 {
   "order_id": "order_id",
   "time": "2012-03-19T07:22Z",
-  "measurements": "хуйня, которая упала с сервака",
+  "measurements": "all params",
   "coords": "{0} {1}"
 }, ...
 ]
