@@ -1,4 +1,4 @@
-# Andruha wants to connect with server 
+# Android wants to connect with server 
 ## GET api\CarTask params: car_id=""
 ```
 {
@@ -29,7 +29,7 @@
 }
 ```
 
-# Andruha sends his data to serv
+# Android sends his data to serv
 ## POST api\Orders\  param: jsoned="(&)"
 ## Ans status ok
 **(&)**
@@ -44,7 +44,7 @@
 ]
 ```
 
-# Bro wants car list capable to do his biding
+# Browser wants car list capable to do his biding
 ## GET params: car_params="(\*)", department_coords="{0} {1}", department_time=""
 
 ### (\*)
@@ -88,7 +88,7 @@
 ]
 ```
 
-# Bro wants to ORDER
+# Browser wants to ORDER
 ## POST api\OrderCar params: (
 ##            string Car_id,          
 ##            string Department_time,
@@ -104,7 +104,7 @@
 { "status":"ok" }
 ```
 
-# Bro wants detales on cars 
+# Browser wants detales on cars 
 ## GET param: order_id="", coord="{0} {1}" ИЛИ time="time"
 
 ```
@@ -129,7 +129,7 @@
   }
 ```
 
-# Bro wants coord for map
+# Browser wants coord for map
 ## GET  api/OrdersMapping params: order_id="{0} {1} {2} ..." 
 
 ```
@@ -146,7 +146,7 @@
 ]
 ```
 
-# BRO wants list of orders
+# Browser wants list of orders
 ## GET param: client_id=""
 
 ```
@@ -160,19 +160,19 @@
 ]
 ```
 
-# BRO creates user
+# Browser creates user
 ## POST api\client params: (string name, string phone, string email = "")
 
 **ANS** status
 
 
-# BRO wants id of user by phone + name
+# Browser wants id of user by phone + name
 ## GET api\client params: (string name, string phone)
 
 **ANS** status, client_id
 
 
-# BRO wants user info by id
+# Browser wants user info by id
 ## GET api\client params: (string id)
 
 **ANS** status, name, phone, email
